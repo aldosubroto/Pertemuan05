@@ -1,0 +1,27 @@
+import React, { Component } from 'react';
+//import logo from './logo.svg'; // soal 1.13 tidak ada pemanggilan logo
+import './App.css'; // import file CSS 
+import './css/bootstrap.min.css';// import bootstrap CSS 
+// pemanggilan Home ,About dan Help
+import Home from './views/Home/Home';
+import About from './views/About/About';
+import Help from './views/Help/Help';
+import Profil from './views/Profil/Profil';
+
+// latihan 5.3 Class Component 
+function Message(){
+  return <p>Hello from Message component</p>
+}
+
+class App extends Component{
+  render(){
+    return(
+      <div>
+        <Message/>
+        {/* pemanggilan home dari home.js dan import  */}
+        <Home/>
+      </div>
+    )
+  }
+}
+export default App
