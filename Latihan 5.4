@@ -1,0 +1,49 @@
+// App.js
+
+import React, { Component } from 'react';
+//import logo from './logo.svg'; // soal 1.13 tidak ada pemanggilan logo
+import './App.css'; // import file CSS 
+import './css/bootstrap.min.css';// import bootstrap CSS 
+// pemanggilan Home ,About dan Help
+import Home from './views/Home/Home';
+
+// Latihan 5.4
+//penggunaan props dalam function 
+function Message(props){
+  return <p>Hello {props.name},</p>
+}
+class App extends Component{
+  render(){
+    return(
+      <div>
+          <Message name ="Ulrich"/>
+          <Home name ="Eden Hazard"/>
+      </div>
+    )
+  }
+}
+export default App
+//===========================================================================================================================================
+
+//Home.js 
+
+import React, { Component} from 'react';
+export default class Home extends React.Component{
+// latihan 5.3
+constructor(props){
+    super(props);
+    this.state ={name : this.props.name}
+}
+// fungsi render menampilkan kode JSX ke browser
+// fungsi return untuk mengembalikan nilai 
+render(){
+    return(
+        <div>
+            <h2>Title Home Component ini Judul Home</h2>
+            <p>Hello my name is {this.props.name}</p>
+        </div>
+           
+    )
+}
+
+}
