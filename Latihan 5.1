@@ -1,0 +1,32 @@
+import React, { Component } from 'react';
+//import logo from './logo.svg'; // soal 1.13 tidak ada pemanggilan logo
+import './App.css'; // import file CSS 
+import './css/bootstrap.min.css';// import bootstrap CSS 
+// pemanggilan Home ,About dan Help
+import Home from './views/Home/Home';
+import About from './views/About/About';
+import Help from './views/Help/Help';
+import Profil from './views/Profil/Profil';
+
+
+// Latihan 5.1 Mmebuat Function 
+function sayhello(){
+  return "Hello World"
+}
+class App extends Component{
+// deklrasi method, penggunaan method di tandai dengan this
+ bilangHalo(){
+   return"Halo Dunia"
+ }
+
+ render(){
+   return(
+     <>
+     <p>SayHello : <b>{sayhello()}</b></p>
+     <p>bilangHalo :<b>{this.bilangHalo()}</b></p>
+     </>
+   )
+ }
+}
+
+export default App
