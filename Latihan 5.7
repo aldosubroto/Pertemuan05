@@ -10,7 +10,8 @@ import About from './views/About/About';
 import Help from './views/Help/Help';
 //import Profil from './views/Profil/Profil';
 import Card from './components/Card';
-
+// latihan 5.9
+import Input from './components/Input/Input.js';
 
 class App extends Component{
   constructor(){
@@ -33,6 +34,8 @@ class App extends Component{
           return <Help/>
      else if(this.state.view=='card')
           return <Card/>
+     else if(this.state.view=='input')
+          return <Input/>
     }
     return(
         //pembuatan navbar
@@ -54,6 +57,10 @@ class App extends Component{
                 <li className="nav-item">
                   <a onClick={()=> this.setState({view :'card'})} className="nav-link" href="#">Card</a>
                 </li>
+                
+                 <li className="nav-item">
+                  <a onClick={()=> this.setState({view :'input'})} className="nav-link" href="#">Input</a>
+                </li>
               </ul>
             </nav>
 
@@ -65,6 +72,47 @@ class App extends Component{
 }
 export default App
 
+//=====================================================================================================================================================================
+// input.js
+
+import React, {Component} from 'react';
+import './Input.css';
+export default class Input extends Component {
+    constructor(){
+        super();
+        
+        this.state = {status : ''}
+   }
+
+   render(){
+       return(
+           <div className="input">
+               <input type="text" name="status" placeholder="Enter Your Status" onChange={(ev)=> this.setState({status : ev.target.value})}/>
+                <p>Your status : {this.state.status}</p>
+           </div>
+       )
+   }
+}
+
+//==================================================================================================================================================================
+
+// input.css
+.input{
+    width: 550px;
+    background: #fff;
+    border-radius: 4px;
+    padding: 20px;
+    margin: auto;
+    margin-top: 10px;
+}
+
+.input input{
+    width: 530px;
+    border-radius: 4px;
+    border: 1px solid #eee;
+    padding: 8px;
+    
+}
 //====================================================================================================================================================================
 // card.js 
 
