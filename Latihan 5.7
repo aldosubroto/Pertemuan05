@@ -114,10 +114,36 @@ export default class Input extends Component {
     
 }
 //====================================================================================================================================================================
+//main.js
+import React, {Component} from 'react';
+import Card from './components/Card/Card';
+import Input from './components/Input/Input.js';
+
+export default class Main extends Component{
+//    constructor(){
+//        super();
+//        this.state ={
+//            your_name : '',
+//            status : ''
+//        }
+//    }
+   
+    render(){
+        return(
+           <Card>
+               {/* children dari component Card */}
+               <p>Bulid encapsulated components that manage their own state, then compose them to make complex UIs</p> 
+           </Card>
+            
+        )
+    }
+}
+
+//===================================================================================================================================================================
 // card.js 
 
 import React,{Component} from 'react';
-import './Card/Card.css';
+import './Card.css';
 
 //Latihan 5.7
 export default class Card extends Component {
@@ -130,9 +156,15 @@ render(){
             <div className="card-body">
                 {/* deklrasi props */}
                 {this.props.children}
-                    <card>
-                    <p>Build encapsulated components that manage their own state, then compose them to make complex UIs</p>
-                     </card>
+                    <Card>
+                   
+                     </Card>
+            </div>
+
+        </div>
+    )
+}
+}
             </div>
 
         </div>
