@@ -1,0 +1,286 @@
+// 1. App.js 
+// yang menjadi default sistem hasil output adalah App.js -> diatur di index.js yang mengatur hasil output keluar 
+
+import React, { Component } from 'react';
+//import logo from './logo.svg'; // soal 1.13 tidak ada pemanggilan logo
+import './App.css'; // import file CSS 
+import './css/bootstrap.min.css';// import bootstrap CSS 
+// pemanggilan Home ,About dan Help
+import About from './views/About/About';
+import Help from './views/Help/Help';
+//import Profil from './views/Profil/Profil';
+ import Main from './Main/Main';
+
+ class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      // your_name: "",
+      // status: "",
+      view :'home',
+    };
+  }
+
+  render() {
+    //     //functional component View untuk mengatur Component yang tampil 
+//     // deklrasi paling cepat 
+    const View = ()=>{
+      if(this.state.view=='home')
+           return <Main/>
+      else if(this.state.view=='about')
+          return <About/>
+      else if(this.state.view=='help')
+          return <Help/>
+    }
+    return (
+
+            //pembuatan navbar
+       <div>
+            <nav className="navbar navbar-expand-sm bg-dark navbar-dark">
+              <ul className="navbar-nav">
+                <li className="nav-item">
+                  <a onClick={()=> this.setState({view :'home'})} className="nav-link" href="#">Home</a>
+                </li>
+
+                <li className="nav-item">
+                  <a onClick={()=> this.setState({view :'about'})} className="nav-link" href="#">About</a>
+                </li>
+
+                <li className="nav-item">
+                  <a onClick={()=> this.setState({view :'help'})} className="nav-link" href="#">Help</a>
+                </li>
+              </ul>
+            </nav>
+                 <View/>  {/* {Panggil Component View} */}
+      </div>
+    );
+  }
+}
+export default App;
+
+//=======================================================================================================================================================================
+// 2. Input.js
+
+import React, { Component } from 'react';
+import './Input.css'
+export default class Input extends Component {
+    // constructor(props) {
+    //     super(props);
+    //     this.state = { status: '' }
+    // }
+
+    render() {
+        return (
+            //latihan 5.9, 5.10
+            // disini cuma tempat input gak ada judulnya 
+            <div className="input">
+                <input
+
+                    type="text"
+
+                    name="your_name"
+
+                    placeholder="Enter Your Name"
+
+                    onChange={(e) => this.props.getValues(e.target.name, e.target.value)}
+
+                />
+
+                <input
+
+                    type="text"
+
+                    name="status"
+
+                    placeholder="Enter Your Status"
+
+                    onChange={(e) => this.props.getValues(e.target.name, e.target.value)}
+
+                />
+
+            </div>
+        )
+    }
+}
+//=========================================================================================================
+// Input.css
+
+.input{
+    width: 550px;
+    background: #fff;
+    border-radius: 4px;
+    padding: 20px;
+    margin: auto;
+    margin-top: 10px;
+}
+
+.input input{
+    width: 530px;
+    border-radius: 4px;
+    border: 1px solid #eee;
+    padding: 8px;
+    
+}
+
+//====================================================================================================================================================================
+//3. Card.js
+
+import { Body, Container, Header } from "./styles/card"; // card.css
+
+export default function Card({ children, ...restProps }) {
+  return <Container {...restProps}>{children}</Container>;
+}
+
+Card.Header = function CardHeader({ children, ...restProps }) {
+  return <Header {...restProps}>{children}</Header>;
+};
+
+Card.Body = function CardBody({ children, ...restProps }) {
+  return <Body {...restProps}>{children}</Body>;
+};
+
+//==================================================================================================================
+//CARD.CSS
+import styled from "styled-components";
+
+
+
+export const Container = styled.div`
+
+  background: #fff;
+
+  width: 550px;
+
+  margin: auto;
+
+  margin-top: 10px;
+
+  margin-bottom: 10px;
+
+  padding: 20px;
+
+  border-radius: 4px;
+
+  box-shadow: 1px 1px 2px #aaa;
+
+`;
+
+
+
+export const Header = styled.header`
+
+  font-weight: bold;
+
+  color: #4d90fe;
+
+  font-size: 20px;
+
+`;
+
+
+
+export const Body = styled.body`
+
+  font-size: 18px;
+
+`;
+
+//===================================================================================================================================================================
+//4. Header.js -> MUNCUL JUDULNYA 
+
+import React from "react";
+
+const title = () => {
+  return (
+    <h2
+      style={{
+        width: "550px",
+        margin: "auto",
+        marginTop: "10px",
+        textAlign: "center",
+        color: "#4d90fe",
+      }}
+    >
+      Sistem Informasi E-biz
+    </h2>
+  );
+};
+
+class Header extends React.Component {
+  render() {
+    return <div>{title()}</div>;
+  }
+}
+
+export default Header;
+
+//====================================================================================================================================================================
+// 5. Main.js 
+// Disini di Main akan mengimport Card, Header, Input dari components
+
+import React, { Component } from "react";
+import Card from "../components/Card/Card";
+import Header from '../components/Header/Header';
+import Input from "../components/Input/Input";
+
+export default class Main extends Component {
+  constructor() {
+    super();
+    this.state = {
+      your_name: "",
+      status: "",
+    };
+  }
+  render() {
+    return (
+      <React.Fragment>
+        <Header />
+        <Card>
+          <div>
+              {/* // disni kita import Input dari Input.js */}
+            <Input
+              getValues={(name, value) => this.setState({ [name]: value })}
+            />
+          </div>
+        </Card>
+
+        <Card>
+          <Card.Header>{this.state.your_name}</Card.Header>
+          <Card.Body>
+            <p>{this.state.status}</p>
+          </Card.Body>
+        </Card>
+      </React.Fragment>
+    );
+  }
+}
+//=======================================================================================================================================================================
+//  About.js, Help.js 
+
+// 6. About.js 
+import React, { Component} from 'react';
+export default class About extends React.Component{
+// latihan 1.13 (penggunaan State secara dinamis) 
+render(){
+        return(
+            <div>
+                Component About
+            </div>
+        )
+    }
+}
+
+// 7. Help.js 
+
+import React, { Component} from 'react';
+export default class Help extends React.Component{
+// latihan 1.13 (penggunaan State secara dinamis) 
+render(){
+        return(
+            <div>
+                Component Help
+            </div>
+        )
+    }
+}
+//=====================================================================================================================================
